@@ -15,8 +15,8 @@ class GamesView extends StatefulWidget {
 }
 
 class _GamesView extends State<GamesView> {
-  String currentGame = "";
-  bool toBeUpdated = false;
+  String _currentGame = "";
+  bool _toBeUpdated = false;
 
   Widget getStarWidget(Game game) {
     return IconButton(
@@ -32,7 +32,7 @@ class _GamesView extends State<GamesView> {
         widget.onTap();
         setState(() {
           // reload view
-          toBeUpdated = !toBeUpdated;
+          _toBeUpdated = !_toBeUpdated;
         });
       },
     );
@@ -43,55 +43,46 @@ class _GamesView extends State<GamesView> {
     for (var i = 0; i < games.length; i++) {
       int logSize = games[i].log.length;
 
-      list.add(
-        SizedBox(
-            width: double.infinity,
-            height: MediaQuery.of(context).orientation == Orientation.portrait
-                ? 100
-                : 50,
-            child: Padding(
+      list.add(SizedBox(
+          width: double.infinity,
+          height: MediaQuery.of(context).orientation == Orientation.portrait
+              ? 100
+              : 50,
+          child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: TextButton(
-                style: games[i].log.isEmpty
-                    ? Styling.defaultButtonStyleDisabled()
-                    : Styling.defaultButtonStyle(),
-                onPressed: games[i].log.isEmpty
-                    ? null
-                    : () => navigateToLog(games[i].log),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        games[i].game_uuid,
-                        style: TextStyle(
-                            color: getTextColorForGame(
-                                games[i].game_uuid, logSize)),
-                      ),
-                    ),
-                    Text(
-                      '#$logSize',
-                    ),
-                    IconButton(
-                      padding: EdgeInsets.zero,
-                      icon: const Icon(
-                        Icons.delete,
-                      ),
-                      color: Colors.red,
-                      onPressed: () {
-                        widget.storage.deleteGame(games[i].game_uuid);
-                        setState(() {
-                          // reload view
-                          toBeUpdated = !toBeUpdated;
-                        });
-                      },
-                    ),
-                    getStarWidget(games[i]),
-                  ],
-                ),
-              ),
-            )),
-      );
+                  style: games[i].log.isEmpty
+                      ? Styling.defaultButtonStyleDisabled()
+                      : Styling.defaultButtonStyle(),
+                  onPressed: games[i].log.isEmpty
+                      ? null
+                      : () => navigateToLog(games[i].log),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Flexible(
+                          child: Text(
+                            games[i].game_uuid,
+                            style: TextStyle(
+                                color: getTextColorForGame(
+                                    games[i].game_uuid, logSize)),
+                          ),
+                        ),
+                        Text('#$logSize'),
+                        IconButton(
+                          padding: EdgeInsets.zero,
+                          icon: const Icon(Icons.delete),
+                          color: Colors.red,
+                          onPressed: () {
+                            widget.storage.deleteGame(games[i].game_uuid);
+                            setState(() {
+                              // reload view
+                              _toBeUpdated = !_toBeUpdated;
+                            });
+                          },
+                        ),
+                        getStarWidget(games[i]),
+                      ])))));
     }
     return Column(children: list);
   }
@@ -117,32 +108,25 @@ class _GamesView extends State<GamesView> {
   @override
   void initState() {
     super.initState();
-    currentGame = widget.storage.currentGame.game_uuid;
+    _currentGame = widget.storage.currentGame.game_uuid;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("All Games"),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-            child: Container(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  children: [
-                    Center(
-                      child: Text(
-                        currentGame,
-                        style: const TextStyle(color: Colors.grey),
-                      ),
-                    ),
-                    getTextWidgets(widget.storage.games.reversed.toList()),
-                  ],
-                ))),
-      ),
-    );
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: const Text("All Games"),
+        ),
+        body: Center(
+            child: SingleChildScrollView(
+                child: Container(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(children: [
+                      Center(
+                          child: Text(_currentGame,
+                              style: const TextStyle(color: Colors.grey))),
+                      getTextWidgets(widget.storage.games.reversed.toList())
+                    ])))));
   }
 }

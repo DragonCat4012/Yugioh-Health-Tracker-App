@@ -1,6 +1,7 @@
-import 'LogCard.dart';
 import 'package:flutter/material.dart';
 import 'package:yugioh_health_tracker/Util/LogEntry.dart';
+
+import 'LogCard.dart';
 
 class LogPage extends StatefulWidget {
   const LogPage({super.key, required this.title, required this.logEntries});
@@ -15,13 +16,10 @@ class _LogPageState extends State<LogPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Log'),
-      ),
+      appBar: AppBar(title: const Text('Log')),
       body: ListView(
-        padding: const EdgeInsets.fromLTRB(4.0, 4.0, 4.0, 4.0),
-        children: widget.logEntries.map((entry) => LogCard(entry)).toList(),
-      ),
+          padding: const EdgeInsets.fromLTRB(4.0, 4.0, 4.0, 4.0),
+          children: widget.logEntries.map((entry) => LogCard(entry)).toList()),
     );
   }
 }
