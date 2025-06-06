@@ -128,11 +128,13 @@ class _LifePointOptionsView extends State<LifePointOptionsView> {
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
         overlayColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
-            if (states.contains(MaterialState.hovered))
+            if (states.contains(MaterialState.hovered)) {
               return Colors.blue.withOpacity(0.04);
+            }
             if (states.contains(MaterialState.focused) ||
-                states.contains(MaterialState.pressed))
+                states.contains(MaterialState.pressed)) {
               return Colors.blue.withOpacity(0.12);
+            }
             return null; // Defer to the widget's default.
           },
         ));
@@ -147,11 +149,13 @@ class _LifePointOptionsView extends State<LifePointOptionsView> {
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
         overlayColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
-            if (states.contains(MaterialState.hovered))
+            if (states.contains(MaterialState.hovered)) {
               return Colors.blue.withOpacity(0.04);
+            }
             if (states.contains(MaterialState.focused) ||
-                states.contains(MaterialState.pressed))
+                states.contains(MaterialState.pressed)) {
               return Colors.blue.withOpacity(0.12);
+            }
             return null; // Defer to the widget's default.
           },
         ));

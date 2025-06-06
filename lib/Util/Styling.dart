@@ -16,18 +16,20 @@ class Styling {
     shape: MaterialStateProperty.all(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
-        side: BorderSide(width: 1, color: Colors.black),
+        side: const BorderSide(width: 1, color: Colors.black),
       ),
     ),
     foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
     backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
     overlayColor: MaterialStateProperty.resolveWith<Color?>(
       (Set<MaterialState> states) {
-        if (states.contains(MaterialState.hovered))
+        if (states.contains(MaterialState.hovered)) {
           return Colors.blue.withOpacity(0.04);
+        }
         if (states.contains(MaterialState.focused) ||
-            states.contains(MaterialState.pressed))
+            states.contains(MaterialState.pressed)) {
           return Colors.blue.withOpacity(0.12);
+        }
         return null; // Defer to the widget's default.
       },
     ),
@@ -37,18 +39,20 @@ class Styling {
     shape: MaterialStateProperty.all(
       RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
-        side: BorderSide(width: 1, color: Colors.grey),
+        side: const BorderSide(width: 1, color: Colors.grey),
       ),
     ),
     foregroundColor: MaterialStateProperty.all<Color>(Colors.grey),
     backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
     overlayColor: MaterialStateProperty.resolveWith<Color?>(
           (Set<MaterialState> states) {
-        if (states.contains(MaterialState.hovered))
+        if (states.contains(MaterialState.hovered)) {
           return Colors.blue.withOpacity(0.04);
+        }
         if (states.contains(MaterialState.focused) ||
-            states.contains(MaterialState.pressed))
+            states.contains(MaterialState.pressed)) {
           return Colors.blue.withOpacity(0.12);
+        }
         return null; // Defer to the widget's default.
       },
     ),

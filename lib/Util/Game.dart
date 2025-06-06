@@ -19,9 +19,9 @@ class Game {
 
   String toJson() {
     List<String> entries = [];
-    log.forEach((element) {
+    for (var element in log) {
       entries.add(element.toJson());
-    });
+    }
     return '{"game_uuid": "$game_uuid", "log": [${entries.join(", ")}]}';
   }
 

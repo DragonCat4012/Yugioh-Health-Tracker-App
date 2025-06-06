@@ -50,7 +50,7 @@ class LogCard extends StatelessWidget {
   Widget aloha(BuildContext context, value) {
     Widget child;
     if (value == '') {
-      child = SizedBox(width: minWidth);
+      child = const SizedBox(width: minWidth);
     } else {
       child = SizedBox(
           width: minWidth,

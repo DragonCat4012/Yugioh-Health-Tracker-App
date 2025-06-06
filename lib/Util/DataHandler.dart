@@ -9,7 +9,7 @@ class DataHandler {
   Game currentGame = Game();
   List<Game> games = List.empty();
 
-  DataHandler() {}
+  DataHandler();
 
   Future<void> loadGames() async {
     var filecontent = await fileHandler.readFile();
@@ -31,7 +31,7 @@ class DataHandler {
     }
 
     print("init data: ${games.length} games");
-    print("init cur: " + currentGame.game_uuid);
+    print("init cur: ${currentGame.game_uuid}");
   }
 
   void addLogEntryToGame(LogEntry entry) {

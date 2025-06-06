@@ -8,19 +8,19 @@ class GameViewModel extends ChangeNotifier {
   int maxHealth = 8000;
 
   GameViewModel(health) {
-    this.maxHealth = health;
-    this.health1 = maxHealth;
-    this.health2 = maxHealth;
+    maxHealth = health;
+    health1 = maxHealth;
+    health2 = maxHealth;
   }
 
   GameViewModel.fromGame(int health, Game game ) {
-    this.maxHealth = health;
-    this.health1 = maxHealth;
-    this.health2 = maxHealth;
+    maxHealth = health;
+    health1 = maxHealth;
+    health2 = maxHealth;
 
-    if(!game.log.isEmpty) {
-      this.health1 = game.log.first.meHealth;
-      this.health2 = game.log.first.enemyHealth;
+    if(game.log.isNotEmpty) {
+      health1 = game.log.first.meHealth;
+      health2 = game.log.first.enemyHealth;
     }
   }
 
@@ -33,11 +33,11 @@ class GameViewModel extends ChangeNotifier {
     return health2.toString();
   }
 
-  edit_health(int _player, int _value) {
-    if (_player == 1) {
-      health1 += _value;
+  edit_health(int player, int value) {
+    if (player == 1) {
+      health1 += value;
     } else {
-      health2 += _value;
+      health2 += value;
     }
     notifyListeners();
   }

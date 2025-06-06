@@ -5,7 +5,7 @@ class LogEntry {
   int meHealth = 0;
   int enemyHealth = 0;
   bool isMe = true;
-  Color color = Color(0xffb74093);
+  Color color = const Color(0xffb74093);
   Color positiveColor = Colors.green;
   Color negativeColor = Colors.red;
 
