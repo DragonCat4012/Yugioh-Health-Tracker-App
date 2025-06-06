@@ -1,12 +1,11 @@
-import 'package:yugioh_health_tracker/Util/DataHandler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:yugioh_health_tracker/Util/DataHandler.dart';
 import 'package:yugioh_health_tracker/ViewComponents/LogView.dart';
-import '../GameViewModel.dart';
-import '../ViewComponents/LifepointsOptionsView.dart';
 
+import '../GameViewModel.dart';
 import '../Util/Styling.dart';
+import '../ViewComponents/LifepointsOptionsView.dart';
 
 class LandscapeOne extends StatefulWidget {
   const LandscapeOne({super.key, required this.title, required this.storage});
@@ -56,23 +55,28 @@ class _LandscapeOne extends State<LandscapeOne> {
                       // Texts
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          vm.get_health1(),
-                          style: const TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: PURPLE,
-                          ),
-                        ),
+                        SizedBox(
+                            width: 150,
+                            child: Text(
+                              vm.get_health1(),
+                              style: const TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: PURPLE,
+                              ),
+                            )),
                         Text(widget.storage.currentGame.game_uuid),
-                        Text(
-                          '${vm.health2}',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                            color: ORANGE,
-                          ),
-                        ),
+                        SizedBox(
+                            width: 150,
+                            child: Text(
+                              '${vm.health2}',
+                              textAlign: TextAlign.right,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30,
+                                color: ORANGE,
+                              ),
+                            )),
                       ],
                     ),
                   ),
@@ -88,7 +92,8 @@ class _LandscapeOne extends State<LandscapeOne> {
                             child: ClipRRect(
                               borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(Styling.barRadius),
-                                  bottomLeft: Radius.circular(Styling.barRadius)),
+                                  bottomLeft:
+                                      Radius.circular(Styling.barRadius)),
                               child: LinearProgressIndicator(
                                 minHeight: 20,
                                 value: vm.health1 / vm.maxHealth,
@@ -106,7 +111,8 @@ class _LandscapeOne extends State<LandscapeOne> {
                             child: ClipRRect(
                               borderRadius: const BorderRadius.only(
                                   topRight: Radius.circular(Styling.barRadius),
-                                  bottomRight: Radius.circular(Styling.barRadius)),
+                                  bottomRight:
+                                      Radius.circular(Styling.barRadius)),
                               child: RotatedBox(
                                 quarterTurns: 2,
                                 child: LinearProgressIndicator(
