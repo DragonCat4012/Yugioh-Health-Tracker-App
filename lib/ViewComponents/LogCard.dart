@@ -13,7 +13,8 @@ class LogCard extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(2.0, 5.0, 5.0, 2.0),
         child: Container(
             decoration: BoxDecoration(
-                border: Border.all(color: Colors.black, width: 0.7),
+                border: Border.all(color: Colors.grey, width: 0.7),
+                boxShadow: [],
                 borderRadius: const BorderRadius.all(Radius.circular(8))),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -56,7 +57,8 @@ class LogCard extends StatelessWidget {
           width: minWidth,
           child: Container(
               decoration: BoxDecoration(
-                  color: entry.color,
+                  border: Border.all(color: entry.color, width: 0.7),
+                  color: entry.color.withOpacity(0.3),
                   borderRadius: const BorderRadius.all(Radius.circular(8))),
               child: Center(
                 child: Text(value,
