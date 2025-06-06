@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:yugioh_health_tracker/GamesView.dart';
 import 'package:yugioh_health_tracker/Util/DataHandler.dart';
-import 'package:flutter/material.dart';
-import 'Util/Styling.dart';
-import 'GameViews/PortraitView.dart';
+
 import 'GameViews/LandscapeOne.dart';
+import 'GameViews/PortraitView.dart';
+import 'Util/Styling.dart';
 import 'ViewComponents/LogView.dart';
 
 class HomeView extends StatefulWidget {
@@ -16,6 +17,7 @@ class HomeView extends StatefulWidget {
 class _HomeView extends State<HomeView> {
   final DataHandler storage = DataHandler();
   String currentGame = ""; // TODO: maybe remove
+  bool shoudlUpdate = true;
 
   void newGame() async {
     storage.createNewGame();
@@ -27,6 +29,7 @@ class _HomeView extends State<HomeView> {
 
   @override
   void initState() {
+    print("a");
     storage.loadGames().then((value) {
       currentGame = storage.currentGame.game_uuid;
       // print('> Init View2: ${storage.currentGame.game_uuid}');
@@ -48,7 +51,7 @@ class _HomeView extends State<HomeView> {
                 child: Column(
                   children: [
                     const Center(
-                      child:  Text(
+                      child: Text(
                         "Continue Game",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
@@ -92,8 +95,6 @@ class _HomeView extends State<HomeView> {
                     const SizedBox(
                       height: 50,
                     ),
-
-
                     SizedBox(
                       width: double.infinity,
                       child: TextButton.icon(
@@ -124,6 +125,13 @@ class _HomeView extends State<HomeView> {
                             MaterialPageRoute(
                                 builder: (context) => GamesView(
                                       storage: storage,
+                                      onTap: () {
+                                        setState(() {
+
+
+                                        shoudlUpdate = !shoudlUpdate;
+                                        });
+                                      },
                                     )),
                           );
                         },
@@ -147,7 +155,6 @@ class _HomeView extends State<HomeView> {
                         child: const Text("Current Games Logs"),
                       ),
                     ),
-
                   ],
                 ))),
       ),

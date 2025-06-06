@@ -1,14 +1,14 @@
-import 'dart:ffi';
-
+import 'package:flutter/material.dart';
 import 'package:yugioh_health_tracker/Util/DataHandler.dart';
 import 'package:yugioh_health_tracker/Util/Game.dart';
 import 'package:yugioh_health_tracker/ViewComponents/LogView.dart';
-import 'package:flutter/material.dart';
+
 import 'Util/Styling.dart';
 
 class GamesView extends StatefulWidget {
-  const GamesView({super.key, required this.storage});
+  const GamesView({super.key, required this.storage, required this.onTap});
   final DataHandler storage;
+  final VoidCallback onTap;
 
   @override
   State<GamesView> createState() => _GamesView();
@@ -29,7 +29,9 @@ class _GamesView extends State<GamesView> {
       ),
       onPressed: () {
         widget.storage.switchCurrentGame(game.game_uuid);
-        setState(() { // reload view
+        widget.onTap();
+        setState(() {
+          // reload view
           toBeUpdated = !toBeUpdated;
         });
       },
@@ -78,7 +80,8 @@ class _GamesView extends State<GamesView> {
                       color: Colors.red,
                       onPressed: () {
                         widget.storage.deleteGame(games[i].game_uuid);
-                        setState(() { // reload view
+                        setState(() {
+                          // reload view
                           toBeUpdated = !toBeUpdated;
                         });
                       },
